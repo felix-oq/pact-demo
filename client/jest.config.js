@@ -1,11 +1,9 @@
 module.exports = {
-    "roots": [
+    "preset": "ts-jest",
+    roots: [
         "<rootDir>/test"
     ],
-    "testMatch": [
+    testMatch: [
         "**/*.@(spec|test).ts"
-    ],
-    "transform": {
-        "(spec|test).ts$": "ts-jest"
-    },
+    ]
 }
