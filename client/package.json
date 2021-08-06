@@ -12,7 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@pact-foundation/pact": "^9.16.0"
+    "@pact-foundation/pact": "^9.16.0",
+    "axios": "^0.21.1"
   },
   "devDependencies": {
     "@types/jest": "^26.0.24",

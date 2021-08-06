@@ -20,9 +20,7 @@ describe("Pact Verification", () => {
             provider: "Server",
             providerVersion: "1.0.0",
             providerBaseUrl: `http://localhost:${port}`,
-            pactUrls: [
-                path.resolve(__dirname, '../../../client/pacts/client-server.json')
-            ]
+            pactBrokerUrl: process.env.PACT_BROKER_URL || "http://localhost:9292"
         });
         await verifier.verifyProvider().finally(() => server.close());
     });
