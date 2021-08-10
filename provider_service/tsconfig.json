@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    /* Visit https://aka.ms/tsconfig.json to read more */
+    "target": "es2019",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "noImplicitAny": true,
+
+    "strict": true,
+    
+    "rootDirs": ["./src", "./test"],
+    "esModuleInterop": true,
+
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}

@@ -5,7 +5,7 @@ import { exampleUser, usersRequest, usersResponse } from './api.pact.fixtures';
 
 const options : JestPactOptions = {
     consumer: "Client",
-    provider: "Server",
+    provider: "Consumer Server",
     log: path.resolve(process.cwd(), 'logs', 'pact.log'),
     logLevel: 'warn',
     dir: path.resolve(process.cwd(), 'pacts'),
@@ -14,7 +14,7 @@ const options : JestPactOptions = {
 
 pactWith(options, async (provider) => {
 
-    describe("Server", () => {
+    describe("Consumer Server", () => {
 
         beforeEach(async () => {
             await provider.addInteraction({
