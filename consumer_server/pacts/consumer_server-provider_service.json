@@ -1,0 +1,44 @@
+{
+  "consumer": {
+    "name": "Consumer Server"
+  },
+  "provider": {
+    "name": "Provider Service"
+  },
+  "messages": [
+    {
+      "description": "a message containing a user",
+      "providerStates": [
+        {
+          "name": "sending users",
+          "params": null
+        }
+      ],
+      "contents": {
+        "id": 1,
+        "name": "Max Mustermann",
+        "email": "max@mail.com"
+      },
+      "matchingRules": {
+        "body": {
+          "$": {
+            "matchers": [
+              {
+                "match": "type"
+              }
+            ]
+          }
+        }
+      },
+      "metaData": {
+        "content-type": "application/json",
+        "queue": "users"
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "3.0.0"
+    }
+  }
+}

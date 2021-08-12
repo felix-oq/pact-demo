@@ -1,4 +1,5 @@
-import startAmqpConsumer from "./amqp/consumer";
+import MessageHandler from "./amqp/message_handler";
+import startAmqpListener from "./amqp/message_listener";
 import createApp from "./app";
 import { UserManager } from "./user_manager";
 
@@ -9,7 +10,8 @@ main();
 async function main() {
     const PORT = getPort(DEFAULT_PORT);
     const userManager = new UserManager();
-    await startAmqpConsumer(userManager);
+    const messageHandler = new MessageHandler(userManager);
+    await startAmqpListener(messageHandler);
     const app = createApp(userManager);
     app.listen(PORT, () => console.log(`Server listening on http://localhost:${PORT}`));
 }

@@ -1,9 +1,8 @@
 import * as amqp from 'amqplib';
 import { Connection, Channel } from 'amqplib';
-import { User } from '../model/user';
-import { UserManager } from '../user_manager';
+import MessageGenerator from './message_generator';
 
-async function startAmqpConsumer(userManager: UserManager) {
+export async function startMessagePublishing(generator: MessageGenerator) {
     const RETRY_DELAY = 5;
     let connection: Connection | null = null;
     while(connection == null) {
@@ -33,22 +32,10 @@ async function startAmqpConsumer(userManager: UserManager) {
         process.exit(1);
     }
 
-    channel.consume(QUEUE_NAME, (message) => {
-        if (message) {
-            let user: User;
-            const messageContent = message?.content.toString();
-            console.log(`Received message with content: ${messageContent}`)
-            try {
-                user = JSON.parse(messageContent);
-            } catch (error) {
-                console.log("An error occurred during message parsing: ", error);
-                console.log("Ignoring that message...");
-                return;
-            }
-
-            userManager.addUser(user);
-        }
-    }, {noAck: true});
+    while(true) {
+        const randomUser = generator.createRandomUser();
+        console.log(randomUser);
+        channel.sendToQueue(QUEUE_NAME, Buffer.from(JSON.stringify(randomUser)));
+        await new Promise(f => setTimeout(f, 10000));
+    }
 }
-
-export default startAmqpConsumer;
